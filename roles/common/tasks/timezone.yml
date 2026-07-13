@@ -1,0 +1,17 @@
+---
+# ============================================================================
+# Role    : common
+# File    : timezone.yml
+# Purpose : Configure system timezone
+# Author  : Rajasekhar Miriyala
+# ============================================================================
+
+- name: Configure system timezone
+  ansible.builtin.timezone:
+    name: "{{ timezone }}"
+  register: timezone_result
+
+- name: Display timezone configuration
+  ansible.builtin.debug:
+    msg: "Timezone configured to {{ timezone }}"
+  when: timezone_result.changed

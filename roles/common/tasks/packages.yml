@@ -1,0 +1,24 @@
+---
+# ============================================================================
+# Role    : common
+# File    : packages.yml
+# Purpose : Install common packages required on Enterprise Linux servers
+# Author  : Rajasekhar Miriyala
+# ============================================================================
+
+- name: Install common packages
+  ansible.builtin.package:
+    name: "{{ common_packages }}"
+    state: present
+  register: package_install_result
+
+- name: Update all packages (optional)
+  ansible.builtin.package:
+    name: "*"
+    state: latest
+  when: common_update_packages | bool
+
+- name: Display installed package result
+  ansible.builtin.debug:
+    msg: "Common packages installed successfully."
+  when: package_install_result.changed

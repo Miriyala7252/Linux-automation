@@ -1,0 +1,31 @@
+---
+# ============================================================================
+# Role    : common
+# File    : chrony.yml
+# Purpose : Install and configure Chrony service
+# Author  : Rajasekhar Miriyala
+# ============================================================================
+
+- name: Install chrony package
+  ansible.builtin.package:
+    name: chrony
+    state: present
+
+- name: Enable chronyd service
+  ansible.builtin.service:
+    name: chronyd
+    enabled: true
+
+- name: Start chronyd service
+  ansible.builtin.service:
+    name: chronyd
+    state: started
+
+- name: Verify chronyd service
+  ansible.builtin.command: systemctl is-active chronyd
+  register: chrony_status
+  changed_when: false
+
+- name: Display chronyd status
+  ansible.builtin.debug:
+    msg: "Chrony service status: {{ chrony_status.stdout }}"

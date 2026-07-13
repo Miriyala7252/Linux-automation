@@ -1,2 +1,21 @@
 ---
-# defaults file for common
+# ============================================================================
+# Default variables for Common Role
+# ============================================================================
+
+timezone: "Asia/Kolkata"
+
+common_update_packages: false
+
+common_packages:
+  - bash-completion
+  - vim-enhanced
+  - wget
+  - curl
+  - unzip
+  - tar
+  - rsync
+  - git
+  - bind-utils
+  - net-tools
+  - lsof

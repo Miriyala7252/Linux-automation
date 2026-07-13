@@ -1,0 +1,16 @@
+---
+# ============================================================================
+# Role    : common
+# File    : directories.yml
+# Purpose : Create standard directories on Linux servers
+# Author  : Rajasekhar Miriyala
+# ============================================================================
+
+- name: Create standard directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  loop: "{{ common_directories }}"
