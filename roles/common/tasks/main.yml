@@ -1,2 +1,37 @@
 ---
 # tasks file for common
+---
+- name: Install common packages
+  ansible.builtin.import_tasks: packages.yml
+  tags:
+    - packages
+
+- name: Configure timezone
+  ansible.builtin.import_tasks: timezone.yml
+  tags:
+    - timezone
+
+- name: Configure chrony
+  ansible.builtin.import_tasks: chrony.yml
+  tags:
+    - chrony
+
+- name: Create standard directories
+  ansible.builtin.import_tasks: directories.yml
+  tags:
+    - directories
+
+- name: Configure bash aliases
+  ansible.builtin.import_tasks: aliases.yml
+  tags:
+    - aliases
+
+- name: Configure MOTD
+  ansible.builtin.import_tasks: motd.yml
+  tags:
+    - motd
+
+- name: Validate server configuration
+  ansible.builtin.import_tasks: validation.yml
+  tags:
+    - validation
