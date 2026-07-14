@@ -1,0 +1,38 @@
+---
+###############################################################################
+# Role    : security
+# File    : ssh.yml
+# Purpose : Configure Enterprise SSH Security
+# Author  : Rajasekhar Miriyala
+###############################################################################
+
+- name: Install OpenSSH Server
+  ansible.builtin.package:
+    name: openssh-server
+    state: present
+
+- name: Deploy enterprise sshd configuration
+  ansible.builtin.template:
+    src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: '0600'
+    backup: true
+  notify:
+    - Restart sshd
+
+- name: Enable SSH service
+  ansible.builtin.service:
+    name: sshd
+    enabled: true
+    state: started
+
+- name: Verify SSH service
+  ansible.builtin.command: systemctl is-active sshd
+  register: ssh_status
+  changed_when: false
+
+- name: Display SSH status
+  ansible.builtin.debug:
+    msg: "SSH Service Status : {{ ssh_status.stdout }}"

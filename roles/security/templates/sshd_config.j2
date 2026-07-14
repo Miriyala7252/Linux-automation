@@ -1,0 +1,36 @@
+###############################################################################
+# Enterprise SSH Configuration
+# Managed by Ansible
+###############################################################################
+
+Port {{ ssh_port }}
+
+Protocol 2
+
+PermitRootLogin {{ permit_root_login }}
+
+PasswordAuthentication {{ password_authentication }}
+
+PermitEmptyPasswords no
+
+ChallengeResponseAuthentication no
+
+UsePAM yes
+
+X11Forwarding no
+
+PrintMotd no
+
+ClientAliveInterval {{ client_alive_interval }}
+
+ClientAliveCountMax {{ client_alive_count_max }}
+
+MaxAuthTries {{ max_auth_tries }}
+
+LoginGraceTime 30
+
+PermitUserEnvironment no
+
+AllowTcpForwarding no
+
+Subsystem sftp /usr/libexec/openssh/sftp-server

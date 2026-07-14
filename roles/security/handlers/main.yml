@@ -1,2 +1,9 @@
 ---
-# handlers file for security
+###############################################################################
+# Security Handlers
+###############################################################################
+
+- name: Restart sshd
+  ansible.builtin.service:
+    name: sshd
+    state: restarted

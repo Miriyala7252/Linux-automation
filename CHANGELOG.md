@@ -1,24 +1,6 @@
-# Linux Automation Framework
+## Version 1.1.0
 
-## [0.1.0]
-
-### Added
-
-- Repository structure
-- Common role
-
----
-
-## [0.2.0]
-
-### Added
-
-- User Management Role
-
----
-
-## [0.3.0]
-
-### Added
-
-- Health Check Role
+- Added SSH Hardening
+- Added sshd_config template
+- Added SSH restart handler
+- Added SSH validation
