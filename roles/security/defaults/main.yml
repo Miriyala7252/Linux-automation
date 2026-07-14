@@ -1,6 +1,14 @@
 ---
 ###############################################################################
-# Security Role Defaults
+# Project : Linux Automation Framework
+# Role    : Security
+# File    : defaults/main.yml
+# Purpose : Default variables for the Security role
+# Author  : Rajasekhar Miriyala
+###############################################################################
+
+###############################################################################
+# SSH Configuration
 ###############################################################################
 
 ssh_port: 22
@@ -10,19 +18,34 @@ max_auth_tries: 3
 client_alive_interval: 300
 client_alive_count_max: 2
 
+###############################################################################
+# SELinux Configuration
+###############################################################################
+
 selinux_state: enforcing
+selinux_policy: targeted
+
+###############################################################################
+# Firewalld Configuration
+###############################################################################
+
+firewalld_enabled: true
 
 firewalld_services:
   - ssh
+  - http
+  - https
+
+###############################################################################
+# Password Policy
+###############################################################################
 
 password_max_days: 90
 password_min_days: 1
 password_warn_days: 7
 
-auditd_enabled: true
 ###############################################################################
-# SELinux
+# Auditd Configuration
 ###############################################################################
 
-selinux_state: enforcing
-selinux_policy: targeted
+auditd_enabled: true

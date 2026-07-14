@@ -7,3 +7,7 @@
   ansible.builtin.service:
     name: sshd
     state: restarted
+- name: Reload firewalld
+  ansible.builtin.service:
+    name: firewalld
+    state: reloaded

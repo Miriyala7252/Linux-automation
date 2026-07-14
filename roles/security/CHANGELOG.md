@@ -14,3 +14,10 @@
 - Enterprise SELinux configuration
 - SELinux validation
 - Targeted policy support
+## Version 1.3.0
+
+### Added
+
+- Enterprise Firewalld configuration
+- Default service management
+- Firewalld validation
