@@ -1,0 +1,51 @@
+---
+###############################################################################
+# Role    : security
+# Purpose : Enterprise Linux Security Hardening
+# Author   : Rajasekhar Miriyala
+###############################################################################
+
+- name: Configure SSH Security
+  ansible.builtin.import_tasks: ssh.yml
+  tags:
+    - ssh
+
+- name: Configure SELinux
+  ansible.builtin.import_tasks: selinux.yml
+  tags:
+    - selinux
+
+- name: Configure Firewalld
+  ansible.builtin.import_tasks: firewalld.yml
+  tags:
+    - firewalld
+
+- name: Configure Password Policy
+  ansible.builtin.import_tasks: password_policy.yml
+  tags:
+    - password
+
+- name: Configure Sudo Security
+  ansible.builtin.import_tasks: sudo.yml
+  tags:
+    - sudo
+
+- name: Configure Auditd
+  ansible.builtin.import_tasks: auditd.yml
+  tags:
+    - auditd
+
+- name: Configure Kernel Parameters
+  ansible.builtin.import_tasks: sysctl.yml
+  tags:
+    - sysctl
+
+- name: Configure Login Banner
+  ansible.builtin.import_tasks: banner.yml
+  tags:
+    - banner
+
+- name: Validate Security Configuration
+  ansible.builtin.import_tasks: validation.yml
+  tags:
+    - validation

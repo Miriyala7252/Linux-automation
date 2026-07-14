@@ -1,0 +1,22 @@
+---
+###############################################################################
+# Security Role Defaults
+###############################################################################
+
+ssh_port: 22
+permit_root_login: "no"
+password_authentication: "yes"
+max_auth_tries: 3
+client_alive_interval: 300
+client_alive_count_max: 2
+
+selinux_state: enforcing
+
+firewalld_services:
+  - ssh
+
+password_max_days: 90
+password_min_days: 1
+password_warn_days: 7
+
+auditd_enabled: true
