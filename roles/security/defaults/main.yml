@@ -20,3 +20,9 @@ password_min_days: 1
 password_warn_days: 7
 
 auditd_enabled: true
+###############################################################################
+# SELinux
+###############################################################################
+
+selinux_state: enforcing
+selinux_policy: targeted

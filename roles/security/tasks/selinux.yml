@@ -1,0 +1,28 @@
+---
+###############################################################################
+# Role    : security
+# File    : selinux.yml
+# Purpose : Configure SELinux
+# Author  : Rajasekhar Miriyala
+###############################################################################
+
+- name: Install SELinux utilities
+  ansible.builtin.package:
+    name:
+      - policycoreutils
+      - policycoreutils-python-utils
+    state: present
+
+- name: Configure SELinux mode
+  ansible.posix.selinux:
+    policy: targeted
+    state: "{{ selinux_state }}"
+
+- name: Get current SELinux status
+  ansible.builtin.command: getenforce
+  register: selinux_status
+  changed_when: false
+
+- name: Display SELinux status
+  ansible.builtin.debug:
+    msg: "Current SELinux Mode : {{ selinux_status.stdout }}"

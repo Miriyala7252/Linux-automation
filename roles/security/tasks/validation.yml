@@ -1,0 +1,8 @@
+- name: Verify SELinux status
+  ansible.builtin.command: getenforce
+  register: selinux_validation
+  changed_when: false
+
+- name: Display SELinux validation
+  ansible.builtin.debug:
+    msg: "SELinux Status : {{ selinux_validation.stdout }}"
