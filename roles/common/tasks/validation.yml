@@ -1,0 +1,44 @@
+---
+###############################################################################
+# Role    : common
+# File    : validation.yml
+# Purpose : Validate common Linux configuration
+# Author  : Rajasekhar Miriyala
+###############################################################################
+
+- name: Gather package facts
+  ansible.builtin.package_facts:
+
+- name: Verify Chrony package is installed
+  ansible.builtin.assert:
+    that:
+      - "'chrony' in ansible_facts.packages"
+    fail_msg: "Chrony package is not installed."
+    success_msg: "Chrony package validation passed."
+
+- name: Verify timezone configuration
+  ansible.builtin.command: timedatectl show --property=Timezone --value
+  register: timezone_check
+  changed_when: false
+
+- name: Display configured timezone
+  ansible.builtin.debug:
+    msg: "Configured timezone: {{ timezone_check.stdout }}"
+
+- name: Verify chronyd service
+  ansible.builtin.service_facts:
+
+- name: Validate chronyd service state
+  ansible.builtin.assert:
+    that:
+      - ansible_facts.services['chronyd.service'].state == 'running'
+    fail_msg: "Chronyd service is not running."
+    success_msg: "Chronyd service is running."
+
+- name: Display validation summary
+  ansible.builtin.debug:
+    msg:
+      - "Linux common role validation completed successfully."
+      - "Hostname: {{ ansible_hostname }}"
+      - "OS: {{ ansible_distribution }} {{ ansible_distribution_version }}"
+      - "Kernel: {{ ansible_kernel }}"

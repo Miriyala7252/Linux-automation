@@ -2,16 +2,22 @@
 # ============================================================================
 # Role    : common
 # File    : timezone.yml
-# Purpose : Configure system timezone
+# Purpose : Configure server timezone
 # Author  : Rajasekhar Miriyala
 # ============================================================================
+
+- name: Verify timedatectl is available
+  ansible.builtin.command: which timedatectl
+  register: timedatectl_check
+  changed_when: false
+  failed_when: timedatectl_check.rc != 0
 
 - name: Configure system timezone
   ansible.builtin.timezone:
     name: "{{ timezone }}"
   register: timezone_result
 
-- name: Display timezone configuration
+- name: Display timezone configuration result
   ansible.builtin.debug:
     msg: "Timezone configured to {{ timezone }}"
   when: timezone_result.changed

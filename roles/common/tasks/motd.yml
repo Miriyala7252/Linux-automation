@@ -1,0 +1,19 @@
+---
+###############################################################################
+# Role    : common
+# File    : motd.yml
+# Purpose : Configure Message of the Day (MOTD)
+# Author  : Rajasekhar Miriyala
+###############################################################################
+
+- name: Deploy enterprise MOTD
+  ansible.builtin.template:
+    src: motd.j2
+    dest: /etc/motd
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Display MOTD deployment status
+  ansible.builtin.debug:
+    msg: "Enterprise MOTD deployed successfully."
